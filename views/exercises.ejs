@@ -21,23 +21,17 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Add your workout data rows here -->
-        <tr>
-          <td>Push-ups</td>
-          <td>10 minutes</td>
-          <td>3</td>
-          <td>15</td>
-          <td>Bodyweight exercise targeting chest and arms</td>
-          <td>Strength</td>
-        </tr>
-        <tr>
-          <td>Running</td>
-          <td>20 minutes</td>
-          <td>1</td>
-          <td>-</td>
-          <td>Cardiovascular exercise</td>
-          <td>Cardio</td>
-        </tr>
+        <% for (let count = 0; count < Workoutlist.length; count++) { %>
+          <!-- Add your workout data rows here -->
+          <tr>
+           <td><%= Workoutlist[count].workout %></td>
+           <td><%= Workoutlist[count].time %></td>
+           <td><%= Workoutlist[count].reps %></td>
+           <td><%= Workoutlist[count].sets %></td>
+           <td><%= Workoutlist[count].description %></td>
+           <td><%= Workoutlist[count].category %></td>
+          </tr>
+          <% } %>
         <!-- Add more rows as needed -->
       </tbody>
     </table>

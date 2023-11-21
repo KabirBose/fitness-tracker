@@ -10,6 +10,9 @@ const exerciseSchema = new mongoose.Schema({
   sets: Number,
   description: String,
   category: String,
+},
+{
+  collection: "workout"
 });
 
 module.exports = mongoose.model("Exercise", exerciseSchema);
