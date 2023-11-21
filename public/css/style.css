@@ -5,6 +5,7 @@ body {
   margin: 0;
 }
 
+/* navbar */
 nav {
   display: flex;
   justify-content: center;
@@ -20,4 +21,9 @@ nav a {
 }
 .nav-header {
   font-family: "Panchang", sans-serif;
+}
+
+/* homepage */
+.landing-data {
+  height: 100vh;
 }
