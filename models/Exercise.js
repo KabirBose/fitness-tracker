@@ -5,10 +5,9 @@ const exerciseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  time: {
-    type: Number,
-    required: true,
-  },
+  time: String,
+  reps: Number,
+  sets: Number,
   description: String,
   category: String,
 });
