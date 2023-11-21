@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const expenseSchema = new mongoose.Schema({
-  name: {
+const exerciseSchema = new mongoose.Schema({
+  workout: {
     type: String,
     required: true,
   },
-  amount: {
+  time: {
     type: Number,
     required: true,
   },
@@ -13,4 +13,4 @@ const expenseSchema = new mongoose.Schema({
   category: String,
 });
 
-module.exports = mongoose.model("Expense", expenseSchema);
+module.exports = mongoose.model("Exercise", exerciseSchema);
