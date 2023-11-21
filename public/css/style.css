@@ -26,6 +26,9 @@ nav a {
 /* homepage */
 .landing-data {
   height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 footer {
   background-color: black;
