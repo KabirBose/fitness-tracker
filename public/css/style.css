@@ -21,3 +21,11 @@ nav a {
 .nav-header {
   font-family: "Panchang", sans-serif;
 }
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-top: auto; /* Push the footer to the bottom */
+}
