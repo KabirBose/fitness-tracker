@@ -1,15 +1,31 @@
+<!-- Define the document type and language -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Set the character set and viewport for responsiveness -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Link to the external stylesheet for styling -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-  <div class ="exercise-data">
+  <!-- Container for workout data -->
+  <div class="exercise-data">
     <br>
+
+    <!-- Heading for the workout tracker application -->
     <h1 class="nav-header">ZIK Workout Tracker</h1>
+    <br>
+
+    <!-- Button to navigate to the page for adding a new workout -->
+    <button onclick="window.location.href='/exercises/new'">Add New Workout</button>
+
+    <!-- Table to display workout data -->
     <table>
+      <!-- Table header -->
       <thead>
         <tr>
           <th>Workout</th>
@@ -20,21 +36,25 @@
           <th>Category</th>
         </tr>
       </thead>
+
+      <!-- Table body for displaying workout data -->
       <tbody>
         <% for (let count = 0; count < Workoutlist.length; count++) { %>
-          <!-- Add your workout data rows here -->
+          <!-- Loop through each workout in the list and create a table row for each -->
           <tr>
-           <td><%= Workoutlist[count].workout %></td>
-           <td><%= Workoutlist[count].time %></td>
-           <td><%= Workoutlist[count].reps %></td>
-           <td><%= Workoutlist[count].sets %></td>
-           <td><%= Workoutlist[count].description %></td>
-           <td><%= Workoutlist[count].category %></td>
+            <!-- Display workout details in each table cell -->
+            <td><%= Workoutlist[count].workout %></td>
+            <td><%= Workoutlist[count].time %></td>
+            <td><%= Workoutlist[count].reps %></td>
+            <td><%= Workoutlist[count].sets %></td>
+            <td><%= Workoutlist[count].description %></td>
+            <td><%= Workoutlist[count].category %></td>
           </tr>
-          <% } %>
+        <% } %>
         <!-- Add more rows as needed -->
       </tbody>
     </table>
-    </div>
+  </div>
 </body>
+
 </html>

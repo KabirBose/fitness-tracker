@@ -1,34 +1,61 @@
-// third party libraries
-const express = require("express");
-const mongoose = require("mongoose");
-const expressLayouts = require("express-ejs-layouts");
+// Import third-party libraries
+const express = require("express"); // Express.js for building web applications
+const mongoose = require("mongoose"); // Mongoose for MongoDB interactions
+const expressLayouts = require("express-ejs-layouts"); // Express EJS layouts for view rendering
 
-// imported modules
-const pagesRouter = require("../routes/pages");
-const apiRouter = require("../routes/api");
-const MONGO_URI = require("../config/db");
+// Import custom modules
+const pagesRouter = require("../routes/pages"); // Router for pages
+const apiRouter = require("../routes/api"); // Router for API endpoints
+const MONGO_URI = require("../config/db"); // MongoDB URI for database connection
 
+// Create an Express application
 const app = express();
 
-// middleware
+// Import the 'path' module for working with file and directory paths
+const path = require("path");
+
+// Middleware setup
+
+// Parse JSON data in the request body
 app.use(express.json());
+
+// Parse URL-encoded data in the request body
+app.use(express.urlencoded({ extended: true }));
+
+// Use EJS layouts for rendering views
 app.use(expressLayouts);
+
+// Serve static files from the 'public' directory
 app.use(express.static("public"));
-app.use("/css", express.static(__dirname + "public/css"));
-app.use("/javascript", express.static(__dirname + "public/javascript"));
+
+// Serve CSS files from the 'public/css' directory
+app.use("/css", express.static(path.join(__dirname, "public/css")));
+
+// Serve JavaScript files from the 'public/javascript' directory
+app.use("/javascript", express.static(path.join(__dirname, "public/javascript")));
+
+// Set the view engine to EJS
 app.set("view engine", "ejs");
 
-mongoose.connect(MONGO_URI);
+// Connect to MongoDB using the provided URI
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// MongoDB connection event handlers
 let mongoDB = mongoose.connection;
 mongoDB.on("error", console.error.bind(console, "Connection error"));
 mongoDB.once("open", () => {
   console.log("MongoDB Connected");
 });
 
-// routes
+// Routes setup
+
+// Use the 'pagesRouter' for handling page-related routes
 app.use("/", pagesRouter);
+
+// Uncomment the following line if you have an API router
 // app.use("/api", apiRouter);
 
+// Start the server and listen on port 3000
 app.listen(3000, () => {
   console.log("Listening on port http://localhost:3000");
 });

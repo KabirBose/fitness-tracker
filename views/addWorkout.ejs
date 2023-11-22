@@ -1,0 +1,57 @@
+<!-- Define the document type and language -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Set the character set and viewport for responsiveness -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Link to the external stylesheet for styling -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!-- Container for the form to add a new workout -->
+  <div class="add-workout-form">
+
+    <!-- Heading for the new workout form -->
+    <h1>Add New Workout</h1>
+
+    <!-- Form for adding a new workout, submits to "/exercises/new" using the POST method -->
+    <form action="/exercises/new" method="post">
+
+      <!-- Input field for workout name -->
+      <label for="workout">Workout:</label>
+      <input type="text" id="workout" name="workout" required>
+
+      <!-- Input field for workout time -->
+      <label for="time">Time:</label>
+      <input type="text" id="time" name="time">
+
+      <!-- Input field for the number of reps -->
+      <label for="reps">Reps:</label>
+      <input type="number" id="reps" name="reps">
+
+      <!-- Input field for the number of sets -->
+      <label for="sets">Sets:</label>
+      <input type="number" id="sets" name="sets">
+
+      <!-- Textarea for workout description -->
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"></textarea>
+
+      <!-- Input field for workout category -->
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category">
+
+      <!-- Submit button to submit the form -->
+      <button type="submit">Submit</button>
+
+      <!-- Cancel link to navigate back to the exercises page -->
+      <a href="/exercises" class="cancel-link">Cancel</a>
+    </form>
+  </div>
+</body>
+
+</html>
