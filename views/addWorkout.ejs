@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Link to the external stylesheet for styling -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <div class="add-workout-form">
 
     <!-- Heading for the new workout form -->
-    <h1>Add New Workout</h1>
+    <h1 class="nav-header">Add New Workout</h1>
 
     <!-- Form for adding a new workout, submits to "/exercises/new" using the POST method -->
     <form action="/exercises/new" method="post">
@@ -42,14 +42,14 @@
       <textarea id="description" name="description"></textarea>
 
       <!-- Input field for workout category -->
-      <label for="category">Category:</label>
+      <label for="category">Muscle Group:</label>
       <input type="text" id="category" name="category">
-
-      <!-- Submit button to submit the form -->
-      <button type="submit">Submit</button>
-
-      <!-- Cancel link to navigate back to the exercises page -->
-      <a href="/exercises" class="cancel-link">Cancel</a>
+      <br>
+      <!-- Submit and Cancel buttons in the same line -->
+      <div class="button-container">
+        <button type="submit">Submit</button>
+        <button class="cancel-button" onclick="window.location.href='/exercises'">Cancel</button>
+      </div>
     </form>
   </div>
 </body>

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Link to the external stylesheet for styling -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
@@ -21,8 +21,9 @@
     <br>
 
     <!-- Button to navigate to the page for adding a new workout -->
-    <button onclick="window.location.href='/exercises/new'">Add New Workout</button>
-
+    <div class="button-container">
+      <button class="exercises-button" onclick="window.location.href='/exercises/new'">Add New Workout</button>
+    </div>
     <!-- Table to display workout data -->
     <table>
       <!-- Table header -->
@@ -33,7 +34,7 @@
           <th>Sets</th>
           <th>Reps</th>
           <th>Description</th>
-          <th>Category</th>
+          <th>Muscle Group</th>
         </tr>
       </thead>
 

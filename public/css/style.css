@@ -1,11 +1,9 @@
 body {
-  /* font-family: "Panchang", sans-serif; */
-  /* font-family: "Zina", sans-serif; */
   font-family: "Satoshi", sans-serif;
   margin: 0;
 }
 
-/* navbar */
+/* Navbar */
 nav {
   display: flex;
   justify-content: center;
@@ -23,7 +21,7 @@ nav a {
   font-family: "Panchang", sans-serif;
 }
 
-/* homepage */
+/* Homepage */
 .landing-data {
   height: 90vh;
   display: flex;
@@ -32,14 +30,18 @@ nav a {
   flex-direction: column;
 }
 
-/* Excersizes */
-.exercise-data{
-  height: 85vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+.exercise-data {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 95%; /* Adjusted to be wider */
+  max-width: 1000px; /* Adjusted maximum width */
+  margin: 20px auto;
+  text-align: center;
+  min-height: 90vh;
 }
-
+/* Footer */
 footer {
   background-color: black;
   color: white;
@@ -48,6 +50,60 @@ footer {
   margin-top: auto; /* Push the footer to the bottom */
 }
 
+/* Common style for containers */
+.container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Heading style */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Button style */
+button {
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Submit button style */
+button[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Cancel button style */
+.cancel-button {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* Hover effect for buttons */
+button:hover, .cancel-button:hover {
+  opacity: 0.8;
+}
+
+/* Add a gap between buttons */
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Table style */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -55,11 +111,73 @@ table {
 }
 
 th, td {
+  padding: 15px;
   border: 1px solid #ddd;
-  padding: 8px;
   text-align: left;
 }
 
 th {
   background-color: #f2f2f2;
+}
+/* Form style */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Label style */
+label {
+  margin-top: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+/* Input and Textarea style */
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+/* Cancel link style */
+.cancel-link {
+  margin-top: 10px;
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+}
+
+.add-workout-form {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Style for the button on the exercises page */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Style for the "Add New Workout" button */
+.exercises-button {
+  background-color: #4caf50; /* Green color, you can adjust this */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.exercises-button:hover {
+  background-color: #45a049; /* Darker green on hover, you can adjust this */
 }
