@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-let Workout = require("../models/Exercise");
+let Workout = require("../models/Workout");
 
 router.get("/", async (req, res) => {
   try {

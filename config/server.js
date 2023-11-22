@@ -27,7 +27,7 @@ mongoDB.once("open", () => {
 
 // routes
 app.use("/", pagesRouter);
-app.use("/api", pagesRouter);
+// app.use("/api", apiRouter);
 
 app.listen(3000, () => {
   console.log("Listening on port http://localhost:3000");
