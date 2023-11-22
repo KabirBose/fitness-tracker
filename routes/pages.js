@@ -1,23 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-let Workout = require("../models/Exercise");
+const WorkoutModel = require("../models/Exercise");
 
 router.get("/", (req, res) => {
   res.render("index");
 });
 
-router.get("/exercises", (req, res, next) => {
+router.get("/exercises", async (req, res,) => {
   try {
-    const workoutlist =  Workout.find().exec();
-    res.render("exercises"), {
-      title: "exercises",
-      Workoutlist: workoutlist
-    };
-}
-  catch (err) {
-    next(err);
-  }});
-
-
+    const Workoutlist = await WorkoutModel.find();
+    res.render('exercises', { Workoutlist });
+  } catch (error) {
+    // Handle any errors that occurred during data retrieval
+    console.error('Error fetching Workoutlist:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 module.exports = router;
