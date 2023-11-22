@@ -5,6 +5,7 @@ const expressLayouts = require("express-ejs-layouts");
 
 // imported modules
 const pagesRouter = require("../routes/pages");
+const apiRouter = require("../routes/api");
 const MONGO_URI = require("../config/db");
 
 const app = express();
@@ -26,6 +27,7 @@ mongoDB.once("open", () => {
 
 // routes
 app.use("/", pagesRouter);
+app.use("/api", pagesRouter);
 
 app.listen(3000, () => {
   console.log("Listening on port http://localhost:3000");
