@@ -59,5 +59,62 @@ router.post("/exercises/new", async (req, res) => {
   }
 });
 
+// Render the "Edit Workout" page with the selected workout data
+router.get("/exercises/edit/:id", async (req, res) => {
+  try {
+    const workoutId = req.params.id;
+    const workout = await WorkoutModel.findById(workoutId);
+
+    // Render the edit page and pass the workout data to the template
+    res.render("editWorkout", { workout });
+  } catch (error) {
+    console.error("Error fetching workout for edit:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Handle form submission for editing a workout
+router.post("/exercises/edit/:id", async (req, res, next) => {
+  try {
+    let id = req.params.id;
+    
+    // Extract data from the form
+    let updateWorkout = {
+      "workout": req.body.workout,
+      "time": req.body.time,
+      "reps": req.body.reps,
+      "sets": req.body.sets,
+      "description": req.body.description,
+      "category": req.body.category
+    };
+
+    // Update the document in the database based on the provided ID
+    await WorkoutModel.updateOne({ _id: id }, updateWorkout);
+
+    // Redirect to the exercises page after the update
+    res.redirect('/exercises');
+  } catch (err) {
+    // Handle errors
+    console.log(err);
+    res.status(500).end(err); // Adjust the status code as needed
+  }
+});
+
+// Handle the delete operation
+router.get("/exercises/delete/:id", async (req, res) => {
+  try {
+     const workoutId = req.params.id;
+ 
+     // Delete the workout from the database
+     await WorkoutModel.findByIdAndRemove(workoutId);
+ 
+     // Redirect back to the exercises page after deleting the workout
+     res.redirect("/exercises");
+  } catch (error) {
+     console.error("Error deleting workout:", error);
+     res.status(500).send("Internal Server Error");
+  }
+ });
+
 // Export the router to use in other parts of the application
 module.exports = router;

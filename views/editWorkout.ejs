@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <div class="add-workout-form">
+    <h1 class="nav-header">Edit Workout</h1>
+    <form action="/exercises/edit/<%= workout._id %>" method="post">
+
+      <!-- Input field for workout name -->
+      <div class="form-group">
+        <label for="workout">Workout:</label>
+        <input type="text" class="form-control large-input" 
+               id="workout" 
+               placeholder="Name of the Workout" 
+               name="workout"
+               value="<%= workout.workout %>"
+               required>
+      </div>
+
+      <!-- Input field for workout time -->
+      <div class="form-group">
+        <label for="time">Time:</label>
+        <input type="text" class="form-control large-input" 
+               id="time" 
+               placeholder="Time for the Workout" 
+               name="time"
+               value="<%= workout.time %>">
+      </div>
+
+      <!-- Input field for the number of reps -->
+      <div class="form-group">
+        <label for="reps">Reps:</label>
+        <input type="number" class="form-control large-input" 
+               id="reps"
+               placeholder="Number of Reps for the Workout" 
+               name="reps"
+               value="<%= workout.reps %>">
+      </div>
+
+      <!-- Input field for the number of sets -->
+      <div class="form-group">
+        <label for="sets">Sets:</label>
+        <input type="number" class="form-control large-input" 
+               id="sets" 
+               placeholder="Number of Sets for the Workout" 
+               name="sets"
+               value="<%= workout.sets %>">
+      </div>
+
+      <!-- Textarea for workout description -->
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control large-input" 
+                  id="description" 
+                  placeholder="Description of the Workout"
+                  name="description"
+        ><%= workout.description %></textarea>
+      </div>
+
+      <!-- Input field for workout category -->
+      <div class="form-group">
+        <label for="category">Muscle Group:</label>
+        <input type="text" class="form-control large-input" 
+               id="category" 
+               placeholder="Muscle Group for the Workout" 
+               name="category"
+               value="<%= workout.category %>">
+      </div>
+
+      <div class="form-group">
+        <input type="hidden" id="workoutId" name="workoutId">
+      </div>
+
+      <div class="button-container">
+        <button type="submit">Save Changes</button>
+        <button class="cancel-button" onclick="window.location.href='/exercises'">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
