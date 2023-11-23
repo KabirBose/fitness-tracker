@@ -118,7 +118,7 @@ router.delete("/exercises/delete/:id", async (req, res) => {
     console.error("Error deleting workout:", error);
     res.status(500).send("Internal Server Error");
   }
-};);
+});
 
 // Export the router to use in other parts of the application
 module.exports = router;
