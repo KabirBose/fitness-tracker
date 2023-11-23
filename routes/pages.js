@@ -101,20 +101,24 @@ router.post("/exercises/edit/:id", async (req, res, next) => {
 });
 
 // Handle the delete operation
-router.get("/exercises/delete/:id", async (req, res) => {
+router.delete("/exercises/delete/:id", async (req, res) => {
   try {
-     const workoutId = req.params.id;
- 
-     // Delete the workout from the database
-     await WorkoutModel.findByIdAndRemove(workoutId);
- 
-     // Redirect back to the exercises page after deleting the workout
-     res.redirect("/exercises");
+    const workoutId = req.params.id;
+
+    // Delete the workout from the database
+    const result = await WorkoutModel.findByIdAndRemove(workoutId);
+
+    // Handle the result of the delete operation
+    console.log(result);
+
+    // Send a response indicating successful deletion
+    res.redirect('/cal-list');
   } catch (error) {
-     console.error("Error deleting workout:", error);
-     res.status(500).send("Internal Server Error");
+    // Handle the error
+    console.error("Error deleting workout:", error);
+    res.status(500).send("Internal Server Error");
   }
- });
+};);
 
 // Export the router to use in other parts of the application
 module.exports = router;
