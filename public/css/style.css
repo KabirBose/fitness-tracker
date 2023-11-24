@@ -160,6 +160,17 @@ input, textarea {
   text-align: center;
 }
 
+
+.edit-workout-form {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin: 20px auto;
+  text-align: center;
+}
 /* Style for the button on the exercises page */
 .button-container {
   display: flex;
@@ -180,4 +191,21 @@ input, textarea {
 
 .exercises-button:hover {
   background-color: #45a049; /* Darker green on hover, you can adjust this */
+}
+
+/* Adjust the width of the form controls */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%; /* Use 100% width for responsiveness */
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.large-input {
+  width: 100%; /* Use 100% width for responsiveness */
+  padding: 12px; /* Adjust padding as needed */
+  box-sizing: border-box;
 }
