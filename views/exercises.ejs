@@ -55,7 +55,7 @@
               <!-- Edit button that redirects to the edit page with workout ID -->
               <button class="exercises-button" onclick="window.location.href='/exercises/edit/<%= Workoutlist[count]._id %>'">Edit</button>
               <!-- Delete button that triggers a JavaScript function to confirm and delete the workout -->
-              <button onclick="deleteWorkout('<%= Workoutlist[count]._id %>')">Delete</button>
+              <button onclick="confirmDelete('<%= Workoutlist[count]._id %>')">Delete</button>
             </td>
         <% } %>
         <!-- Add more rows as needed -->
@@ -63,6 +63,7 @@
     </table>
   </div>
   <script src="../public/css/deleteConfirmation.js"></script>
+  
 </body>
 
 </html>

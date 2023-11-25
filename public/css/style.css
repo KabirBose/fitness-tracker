@@ -209,3 +209,9 @@ input, textarea {
   padding: 12px; /* Adjust padding as needed */
   box-sizing: border-box;
 }
+a {
+  display: block;
+  color: white;
+  padding: 15px;
+  text-decoration: none;
+}

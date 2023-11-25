@@ -106,17 +106,19 @@ router.delete("/exercises/delete/:id", async (req, res) => {
     const workoutId = req.params.id;
 
     // Delete the workout from the database
-    const result = await WorkoutModel.findByIdAndRemove(workoutId);
+    const result = await WorkoutModel.findOneAndDelete({ _id: workoutId });
 
     // Handle the result of the delete operation
     console.log(result);
 
     // Send a response indicating successful deletion
-    res.redirect('/cal-list');
+    res.redirect('/exercises');
   } catch (error) {
-    // Handle the error
+    // Log the error details
     console.error("Error deleting workout:", error);
-    res.status(500).send("Internal Server Error");
+
+    // Send a response with the error status and message
+    res.status(500).send("Internal Server Error: " + error.message);
   }
 });
 
