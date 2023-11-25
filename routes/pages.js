@@ -123,5 +123,4 @@ router.delete("/exercises/delete/:id", async (req, res) => {
 });
 
 // Export the router to use in other parts of the application
-
 module.exports = router;
