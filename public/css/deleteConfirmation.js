@@ -1,5 +1,3 @@
-// deleteConfirmation.js
-
 function confirmDelete(workoutId) {
     // Display a confirmation dialog
     if (confirm("Are you sure you want to delete this workout?")) {
@@ -16,10 +14,9 @@ function confirmDelete(workoutId) {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      // Redirect to the exercises page after successful deletion
+        // Redirect to the exercises page after successful deletion
       window.location.href = "/exercises";
+      }
     })
     .catch(error => {
       // Handle errors
