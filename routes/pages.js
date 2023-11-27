@@ -8,13 +8,17 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
-router.get("/signup", (req, res) => {
-  res.render("signup");
+// Register new user
+router.get("/register", (req, res) => {
+  res.render("register");
 });
+router.post("/register", (req, res) => {});
 
+// Login user
 router.get("/login", (req, res) => {
   res.render("login");
 });
+router.post("/login", (req, res) => {});
 
 // Retrieve workout data from the database and render the exercises page
 router.get("/exercises", async (req, res) => {

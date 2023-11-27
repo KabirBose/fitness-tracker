@@ -18,7 +18,7 @@ const path = require("path");
 app.use(express.json());
 
 // Parse URL-encoded data in the request body
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 // Use EJS layouts for rendering views
 app.use(expressLayouts);
