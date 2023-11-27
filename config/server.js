@@ -5,7 +5,6 @@ const expressLayouts = require("express-ejs-layouts"); // Express EJS layouts fo
 
 // Import custom modules
 const pagesRouter = require("../routes/pages"); // Router for pages
-const apiRouter = require("../routes/api"); // Router for API endpoints
 const MONGO_URI = require("../config/db"); // MongoDB URI for database connection
 
 // Create an Express application
@@ -32,13 +31,19 @@ app.use(express.static("public"));
 app.use("/css", express.static(path.join(__dirname, "public/css")));
 
 // Serve JavaScript files from the 'public/javascript' directory
-app.use("/javascript", express.static(path.join(__dirname, "public/javascript")));
+app.use(
+  "/javascript",
+  express.static(path.join(__dirname, "public/javascript"))
+);
 
 // Set the view engine to EJS
 app.set("view engine", "ejs");
 
 // Connect to MongoDB using the provided URI
-mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // MongoDB connection event handlers
 let mongoDB = mongoose.connection;
@@ -51,9 +56,6 @@ mongoDB.once("open", () => {
 
 // Use the 'pagesRouter' for handling page-related routes
 app.use("/", pagesRouter);
-
-// Uncomment the following line if you have an API router
-// app.use("/api", apiRouter);
 
 // Start the server and listen on port 3000
 app.listen(3000, () => {
