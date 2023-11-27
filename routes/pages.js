@@ -1,6 +1,8 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 
+const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
 
 // Render the homepage
@@ -12,7 +14,21 @@ router.get("/", (req, res) => {
 router.get("/register", (req, res) => {
   res.render("register");
 });
-router.post("/register", (req, res) => {});
+router.post("/register", async (req, res) => {
+  try {
+    // hashes password using bcryptjs
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = new UserModel({
+      username: req.body.username,
+      password: hashedPassword,
+    });
+    // Save the new workout to the database
+    await newUser.save();
+    res.redirect("/login");
+  } catch (error) {
+    res.redirect("/register");
+  }
+});
 
 // Login user
 router.get("/login", (req, res) => {
