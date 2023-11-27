@@ -14,7 +14,6 @@ const app = express();
 const path = require("path");
 
 // Middleware setup
-
 // Parse JSON data in the request body
 app.use(express.json());
 
@@ -53,7 +52,6 @@ mongoDB.once("open", () => {
 });
 
 // Routes setup
-
 // Use the 'pagesRouter' for handling page-related routes
 app.use("/", pagesRouter);
 

@@ -8,6 +8,14 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
 // Retrieve workout data from the database and render the exercises page
 router.get("/exercises", async (req, res) => {
   try {
@@ -77,22 +85,22 @@ router.get("/exercises/edit/:id", async (req, res) => {
 router.post("/exercises/edit/:id", async (req, res, next) => {
   try {
     let id = req.params.id;
-    
+
     // Extract data from the form
     let updateWorkout = {
-      "workout": req.body.workout,
-      "time": req.body.time,
-      "reps": req.body.reps,
-      "sets": req.body.sets,
-      "description": req.body.description,
-      "category": req.body.category
+      workout: req.body.workout,
+      time: req.body.time,
+      reps: req.body.reps,
+      sets: req.body.sets,
+      description: req.body.description,
+      category: req.body.category,
     };
 
     // Update the document in the database based on the provided ID
     await WorkoutModel.updateOne({ _id: id }, updateWorkout);
 
     // Redirect to the exercises page after the update
-    res.redirect('/exercises');
+    res.redirect("/exercises");
   } catch (err) {
     // Handle errors
     console.log(err);
@@ -112,7 +120,7 @@ router.delete("/exercises/delete/:id", async (req, res) => {
     console.log(result);
 
     // Send a response indicating successful deletion
-    res.redirect('/exercises');
+    res.redirect("/exercises");
   } catch (error) {
     // Log the error details
     console.error("Error deleting workout:", error);

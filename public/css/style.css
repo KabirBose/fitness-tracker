@@ -19,6 +19,7 @@ nav a {
 }
 .nav-header {
   font-family: "Panchang", sans-serif;
+  font-size: 1.3rem;
 }
 
 /* Homepage */
@@ -92,7 +93,8 @@ button[type="submit"] {
 }
 
 /* Hover effect for buttons */
-button:hover, .cancel-button:hover {
+button:hover,
+.cancel-button:hover {
   opacity: 0.8;
 }
 
@@ -110,7 +112,8 @@ table {
   margin-top: 20px;
 }
 
-th, td {
+th,
+td {
   padding: 15px;
   border: 1px solid #ddd;
   text-align: left;
@@ -134,7 +137,8 @@ label {
 }
 
 /* Input and Textarea style */
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -159,7 +163,6 @@ input, textarea {
   margin: 20px auto;
   text-align: center;
 }
-
 
 .edit-workout-form {
   background-color: #fff;
