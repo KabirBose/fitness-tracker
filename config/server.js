@@ -12,6 +12,9 @@ const app = express();
 
 // Import the 'path' module for working with file and directory paths
 const path = require("path");
+const flash = require("express-flash");
+const session = require("express-session");
+const passport = require("passport");
 
 // Middleware setup
 // Parse JSON data in the request body
@@ -19,6 +22,18 @@ app.use(express.json());
 
 // Parse URL-encoded data in the request body
 app.use(express.urlencoded({ extended: false }));
+
+// for auth
+app.use(flash);
+app.use(
+  session({
+    secret: "$ecRetKeyFR65",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Use EJS layouts for rendering views
 app.use(expressLayouts);
@@ -54,6 +69,19 @@ mongoDB.once("open", () => {
 // Routes setup
 // Use the 'pagesRouter' for handling page-related routes
 app.use("/", pagesRouter);
+
+// Login user
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
 
 // Start the server and listen on port 3000
 app.listen(3000, () => {
