@@ -8,10 +8,9 @@ const initializePassport = require("../passport-config");
 const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
 
-initializePassport(passport, (username) => {
-  // return await UserModel.find({ username: username });
-  return username;
-});
+// initializePassport(passport, async (username) => {
+//   return await UserModel.find({ username: username });
+// });
 
 // Render the homepage
 router.get("/", (req, res) => {
@@ -42,14 +41,15 @@ router.post("/register", async (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login");
 });
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-  })
-);
+
+// router.post(
+//   "/login",
+//   passport.authenticate("local", {
+//     successRedirect: "/",
+//     failureRedirect: "/login",
+//     failureFlash: true,
+//   })
+// );
 
 // Retrieve workout data from the database and render the exercises page
 router.get("/exercises", async (req, res) => {
