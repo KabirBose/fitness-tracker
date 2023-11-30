@@ -18,8 +18,8 @@ const authenticateUser = async (username, password, done) => {
   _user = await UserModel.findOne({ username: username });
 
   // if the username does not exist, return null
-  if (_user.username === null) {
-    return done(null, false, { message: "No _user with that username" });
+  if (_user === null) {
+    return done(null, false, { message: "No user with that username" });
   }
 
   // compare password to its' hash and ensure they match
