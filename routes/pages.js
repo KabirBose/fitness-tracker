@@ -1,22 +1,33 @@
+// Third party libraries
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const router = express.Router();
 
+// MongoDB models
 const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
 
+// blank user object to be changed later
 let _user = {};
+
+// takes username and password data from login form
 const authenticateUser = async (username, password, done) => {
+  // gets the user by their username
   _user = await UserModel.findOne({ username: username });
+
+  // if the username does not exist, return null
   if (_user.username === null) {
     return done(null, false, { message: "No _user with that username" });
   }
+
+  // compare password to its' hash and ensure they match
   try {
     if (await bcrypt.compare(password, _user.password)) {
       return done(null, _user.username);
     } else {
+      // if no match then incorrect
       return done(null, false, { message: "Password incorrect" });
     }
   } catch (error) {
@@ -24,15 +35,16 @@ const authenticateUser = async (username, password, done) => {
   }
 };
 
+// use the "username" field for local strategy and for auth
 passport.use(
   new LocalStrategy({ usernameField: "username" }, authenticateUser)
 );
+// when user logs in use user id
 passport.serializeUser((user, done) => {
-  // console.log("logged in");
   done(null, _user._id);
 });
+// when user logs out use user id
 passport.deserializeUser((id, done) => {
-  // console.log("logged out");
   done(null, _user._id);
 });
 
@@ -41,11 +53,12 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
-// Register new user
+// Register page
 router.get("/register", checkNotAuthenticated, async (req, res) => {
   res.render("register");
 });
 
+// Register new user and store hash their password before it is stored in the DB
 router.post("/register", async (req, res) => {
   try {
     // hashes password using bcryptjs
@@ -62,11 +75,12 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login user
+// Login page
 router.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login");
 });
 
+// use Passport auth for login route
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -76,10 +90,12 @@ router.post(
   })
 );
 
+// logout page
 router.get("/logout", (req, res) => {
   res.render("logout");
 });
 
+// logout route that uses method override
 router.delete("/logout", (req, res) => {
   req.logout(function (err) {
     if (err) {
@@ -203,6 +219,7 @@ router.delete("/exercises/delete/:id", checkAuthenticated, async (req, res) => {
   }
 });
 
+// middleware to check if user is authenticated to protect certain routes
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -210,6 +227,7 @@ function checkAuthenticated(req, res, next) {
   res.redirect("/login");
 }
 
+// for routes anyone can access
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return res.redirect("/");

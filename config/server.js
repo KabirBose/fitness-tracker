@@ -13,6 +13,8 @@ const app = express();
 
 // Import the 'path' module for working with file and directory paths
 const path = require("path");
+
+// Passport middleware
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
@@ -24,7 +26,7 @@ app.use(express.json());
 // Parse URL-encoded data in the request body
 app.use(express.urlencoded({ extended: false }));
 
-// for auth
+// For passport auth
 app.use(flash());
 app.use(
   session({
