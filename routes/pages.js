@@ -1,27 +1,18 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-
 const LocalStrategy = require("passport-local").Strategy;
-
 const router = express.Router();
 
 const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
 
-// initializePassport(passport, async (username) => {
-//   const user = await UserModel.findOne({ username: username });
-//   return user.username;
-// });
-
 let _user = {};
 const authenticateUser = async (username, password, done) => {
   _user = await UserModel.findOne({ username: username });
-
   if (_user.username === null) {
     return done(null, false, { message: "No _user with that username" });
   }
-
   try {
     if (await bcrypt.compare(password, _user.password)) {
       return done(null, _user.username);
@@ -36,8 +27,14 @@ const authenticateUser = async (username, password, done) => {
 passport.use(
   new LocalStrategy({ usernameField: "username" }, authenticateUser)
 );
-passport.serializeUser((user, done) => done(null, _user._id));
-passport.deserializeUser((id, done) => done(null, _user._id));
+passport.serializeUser((user, done) => {
+  // console.log("logged in");
+  done(null, _user._id);
+});
+passport.deserializeUser((id, done) => {
+  // console.log("logged out");
+  done(null, _user._id);
+});
 
 // Render the homepage
 router.get("/", (req, res) => {
@@ -45,11 +42,10 @@ router.get("/", (req, res) => {
 });
 
 // Register new user
-router.get("/register", async (req, res) => {
-  // const user = await UserModel.findOne({ username: "jack" });
-  // console.log(user.username);
+router.get("/register", checkNotAuthenticated, async (req, res) => {
   res.render("register");
 });
+
 router.post("/register", async (req, res) => {
   try {
     // hashes password using bcryptjs
@@ -67,21 +63,34 @@ router.post("/register", async (req, res) => {
 });
 
 // Login user
-router.get("/login", (req, res) => {
+router.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login");
 });
 
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/exercises",
     failureRedirect: "/login",
     failureFlash: true,
   })
 );
 
+router.get("/logout", (req, res) => {
+  res.render("logout");
+});
+
+router.delete("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+});
+
 // Retrieve workout data from the database and render the exercises page
-router.get("/exercises", async (req, res) => {
+router.get("/exercises", checkAuthenticated, async (req, res) => {
   try {
     // Fetch all workouts from the database
     const Workoutlist = await WorkoutModel.find();
@@ -96,7 +105,7 @@ router.get("/exercises", async (req, res) => {
 });
 
 // Render the "Add New Workout" page
-router.get("/exercises/new", (req, res) => {
+router.get("/exercises/new", checkAuthenticated, (req, res) => {
   res.render("addWorkout");
 });
 
@@ -132,7 +141,7 @@ router.post("/exercises/new", async (req, res) => {
 });
 
 // Render the "Edit Workout" page with the selected workout data
-router.get("/exercises/edit/:id", async (req, res) => {
+router.get("/exercises/edit/:id", checkAuthenticated, async (req, res) => {
   try {
     const workoutId = req.params.id;
     const workout = await WorkoutModel.findById(workoutId);
@@ -173,7 +182,7 @@ router.post("/exercises/edit/:id", async (req, res, next) => {
 });
 
 // Handle the delete operation
-router.delete("/exercises/delete/:id", async (req, res) => {
+router.delete("/exercises/delete/:id", checkAuthenticated, async (req, res) => {
   try {
     const workoutId = req.params.id;
 
@@ -193,6 +202,20 @@ router.delete("/exercises/delete/:id", async (req, res) => {
     res.status(500).send("Internal Server Error: " + error.message);
   }
 });
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
+  }
+  next();
+}
 
 // Export the router to use in other parts of the application
 module.exports = router;

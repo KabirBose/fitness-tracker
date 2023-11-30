@@ -2,6 +2,7 @@
 const express = require("express"); // Express.js for building web applications
 const mongoose = require("mongoose"); // Mongoose for MongoDB interactions
 const expressLayouts = require("express-ejs-layouts"); // Express EJS layouts for view rendering
+const methodOverride = require("method-override");
 
 // Import custom modules
 const pagesRouter = require("../routes/pages"); // Router for pages
@@ -34,6 +35,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride("_method"));
 
 // Use EJS layouts for rendering views
 app.use(expressLayouts);
