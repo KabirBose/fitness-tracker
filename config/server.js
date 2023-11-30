@@ -54,10 +54,7 @@ app.use(
 app.set("view engine", "ejs");
 
 // Connect to MongoDB using the provided URI
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(MONGO_URI);
 
 // MongoDB connection event handlers
 let mongoDB = mongoose.connection;

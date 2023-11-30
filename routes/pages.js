@@ -5,7 +5,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 const router = express.Router();
-// const initializePassport = require("../passport-config");
 
 const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
@@ -15,16 +14,17 @@ const WorkoutModel = require("../models/Workout");
 //   return user.username;
 // });
 
+let _user = {};
 const authenticateUser = async (username, password, done) => {
-  const user = await UserModel.findOne({ username: username });
+  _user = await UserModel.findOne({ username: username });
 
-  if (user.username === null) {
-    return done(null, false, { message: "No user with that username" });
+  if (_user.username === null) {
+    return done(null, false, { message: "No _user with that username" });
   }
 
   try {
-    if (await bcrypt.compare(password, user.password)) {
-      return done(null, user.username);
+    if (await bcrypt.compare(password, _user.password)) {
+      return done(null, _user.username);
     } else {
       return done(null, false, { message: "Password incorrect" });
     }
@@ -36,8 +36,8 @@ const authenticateUser = async (username, password, done) => {
 passport.use(
   new LocalStrategy({ usernameField: "username" }, authenticateUser)
 );
-passport.serializeUser((user, done) => {});
-passport.deserializeUser((id, done) => {});
+passport.serializeUser((user, done) => done(null, _user._id));
+passport.deserializeUser((id, done) => done(null, _user._id));
 
 // Render the homepage
 router.get("/", (req, res) => {
