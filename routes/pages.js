@@ -50,6 +50,8 @@ passport.deserializeUser((id, done) => {
 
 // Render the homepage
 router.get("/", (req, res) => {
+  res.locals.isAuthenticated = req.isAuthenticated();
+
   res.render("index");
 });
 
