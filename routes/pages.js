@@ -8,9 +8,9 @@ const initializePassport = require("../passport-config");
 const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
 
-// initializePassport(passport, async (username) => {
-//   return await UserModel.find({ username: username });
-// });
+initializePassport(passport, async (username) => {
+  return await UserModel.find({ username: username });
+});
 
 // Render the homepage
 router.get("/", (req, res) => {
