@@ -240,6 +240,7 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
+// middleware that only shows the correct navbar links depending on whether is authenticated or not
 function navBarItems(req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.loggedIn = true;
