@@ -2,16 +2,42 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
+const LocalStrategy = require("passport-local").Strategy;
+
 const router = express.Router();
-const initializePassport = require("../passport-config");
+// const initializePassport = require("../passport-config");
 
 const UserModel = require("../models/User");
 const WorkoutModel = require("../models/Workout");
 
-initializePassport(passport, async (username) => {
+// initializePassport(passport, async (username) => {
+//   const user = await UserModel.findOne({ username: username });
+//   return user.username;
+// });
+
+const authenticateUser = async (username, password, done) => {
   const user = await UserModel.findOne({ username: username });
-  return user.username;
-});
+
+  if (user.username === null) {
+    return done(null, false, { message: "No user with that username" });
+  }
+
+  try {
+    if (await bcrypt.compare(password, user.password)) {
+      return done(null, user.username);
+    } else {
+      return done(null, false, { message: "Password incorrect" });
+    }
+  } catch (error) {
+    return done(error);
+  }
+};
+
+passport.use(
+  new LocalStrategy({ usernameField: "username" }, authenticateUser)
+);
+passport.serializeUser((user, done) => {});
+passport.deserializeUser((id, done) => {});
 
 // Render the homepage
 router.get("/", (req, res) => {
