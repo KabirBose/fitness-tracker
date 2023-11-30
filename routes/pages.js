@@ -49,16 +49,19 @@ passport.deserializeUser((id, done) => {
 });
 
 // Render the homepage
-router.get("/", (req, res) => {
-  res.locals.isAuthenticated = req.isAuthenticated();
-
+router.get("/", navBarItems, (req, res) => {
   res.render("index");
 });
 
 // Register page
-router.get("/register", checkNotAuthenticated, async (req, res) => {
-  res.render("register");
-});
+router.get(
+  "/register",
+  navBarItems,
+  checkNotAuthenticated,
+  async (req, res) => {
+    res.render("register");
+  }
+);
 
 // Register new user and store hash their password before it is stored in the DB
 router.post("/register", async (req, res) => {
@@ -78,7 +81,7 @@ router.post("/register", async (req, res) => {
 });
 
 // Login page
-router.get("/login", checkNotAuthenticated, (req, res) => {
+router.get("/login", navBarItems, checkNotAuthenticated, (req, res) => {
   res.render("login");
 });
 
@@ -93,7 +96,7 @@ router.post(
 );
 
 // logout page
-router.get("/logout", (req, res) => {
+router.get("/logout", navBarItems, (req, res) => {
   res.render("logout");
 });
 
@@ -108,7 +111,7 @@ router.delete("/logout", (req, res) => {
 });
 
 // Retrieve workout data from the database and render the exercises page
-router.get("/exercises", checkAuthenticated, async (req, res) => {
+router.get("/exercises", navBarItems, checkAuthenticated, async (req, res) => {
   try {
     // Fetch all workouts from the database
     const Workoutlist = await WorkoutModel.find();
@@ -234,6 +237,15 @@ function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return res.redirect("/");
   }
+  next();
+}
+
+function navBarItems(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.locals.loggedIn = true;
+    return next();
+  }
+  res.locals.loggedIn = false;
   next();
 }
 
