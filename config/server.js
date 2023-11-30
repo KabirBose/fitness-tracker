@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(
   session({
-    secret: "$ecRetKeyFR65",
+    secret: "$ecRetKey_FR_ong_3500",
     resave: false,
     saveUninitialized: false,
   })
