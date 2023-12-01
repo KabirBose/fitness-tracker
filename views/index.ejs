@@ -1,6 +1,10 @@
 <div class="landing-data">
-    <h1>Welcome to ZIK Fitness</h1>
-    <h2> The People's Fitness <h2>
+    <% if (state === true) { %>
+    <h1> Welcome to ZIK Fitness<%= name %> <h1>
+    <% } else { %>
+    <h1> Welcome to ZIK Fitness<h1>
+    <% } %>
+    <h2> The People's Fitness</h2>
     <button class="exercises-button"><a href="/exercises">Get Started on your fitness Journey</a></button>
     <h3> Offical Partner of the Toronto Raptors and Toronto Maple Leafs<h3>
 </div>

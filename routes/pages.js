@@ -50,7 +50,16 @@ passport.deserializeUser((id, done) => {
 
 // Render the homepage
 router.get("/", navBarItems, (req, res) => {
-  res.render("index");
+  let isLoggedIn = false;
+  let name = "";
+  if (req.isAuthenticated() === true) {
+    isLoggedIn = true;
+    name = `, ${_user.username}`;
+  } else {
+    isLoggedIn = false;
+    name = "";
+  }
+  res.render("index", { state: isLoggedIn, name: name });
 });
 
 // Register page
