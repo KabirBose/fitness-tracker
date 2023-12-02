@@ -10,11 +10,11 @@ nav {
   align-items: center;
   background-color: black;
   gap: 50px;
-  color: white;
+  color: #fff;
 }
 nav a {
   text-decoration: none;
-  color: white;
+  color: #fff;
   font-weight: 600;
 }
 .nav-header {
@@ -214,7 +214,7 @@ textarea {
 }
 a {
   display: block;
-  color: white;
-  padding: 15px;
+  color: #fff;
+  padding: 16px;
   text-decoration: none;
 }
