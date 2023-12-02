@@ -26,7 +26,7 @@ app.use(express.json());
 // Parse URL-encoded data in the request body
 app.use(express.urlencoded({ extended: false }));
 
-// For passport auth
+// For passport authentication
 app.use(flash());
 app.use(
   session({
