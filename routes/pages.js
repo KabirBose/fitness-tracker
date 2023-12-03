@@ -21,7 +21,6 @@ const authenticateUser = async (username, password, done) => {
   if (_user === null) {
     return done(null, false, { message: "No user with that username" });
   }
-
   // compare password to its' hash and ensure they match
   try {
     if (await bcrypt.compare(password, _user.password)) {
