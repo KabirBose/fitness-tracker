@@ -143,6 +143,8 @@ textarea {
   padding: 8px;
   margin-top: 5px;
   box-sizing: border-box;
+  border-radius: 10px;
+  border: solid black 1px;
 }
 
 /* Cancel link style */
@@ -217,4 +219,18 @@ a {
   color: #fff;
   padding: 16px;
   text-decoration: none;
+}
+
+.container-1 {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gym-img {
+  width: 300px;
+  height: 300px;
+  border-radius: 1000px;
 }
