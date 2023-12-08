@@ -69,7 +69,7 @@ mongoDB.once("open", () => {
 
 // Routes setup
 // Use the 'pagesRouter' for handling page-related routes
-app.use("https://wide-eyed-wasp-yoke.cyclic.app/", pagesRouter);
+app.use("/", pagesRouter);
 
 // Start the server and listen on port 3000
 app.listen(3000, () => {
